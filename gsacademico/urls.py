@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework.urlpatterns import format_suffix_patterns
+from gsacademico.Apps.GestionAcademica import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('Nivel/', views.NivelList.as_view()),
+    path('Curso/', views.CursoList.as_view()),
+    path('Seccion/', views.SeccionList.as_view()),
+    path('Materia/', views.MateriaList.as_view()),
+    path('Docente/', views.DocenteList.as_view()),
+    path('Estudiante/', views.EstudianteList.as_view()),
 ]

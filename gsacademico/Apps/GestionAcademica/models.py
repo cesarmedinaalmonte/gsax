@@ -91,7 +91,7 @@ class Materia (models.Model):
 
     Nombre = models.CharField(max_length=50)
     Codigo = models.CharField(max_length=8)
-    Profesor = models.ForeignKey(Docente,null=True, blank= True, on_delete=models.CASCADE)
+    Profesor = models.ManyToManyField(Docente)
 
     def __str__(self):
         return "{0} ({1})".format(self.Nombre, self.Codigo)

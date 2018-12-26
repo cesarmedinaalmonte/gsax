@@ -1,90 +1,76 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from rest_framework.views import APIView
+from rest_framework import serializers, viewsets
 from rest_framework.response import Response
 from rest_framework import status
 from . models import Nivel
-from . models import Curso
+from . models import Pariente
 from . models import Seccion
 from . models import Materia
 from . models import Docente
 from . models import Curso
 from . models import Estudiante
-from . serializers import CursoSerializer
+from . models import MateriaCurso
+from . models import Periodo
+from .serializers import CursoSerializer, PeriodoSerializer
 from . serializers import NivelSerializer
 from . serializers import SeccionSerializer
 from . serializers import MateriaSerializer
 from . serializers import DocenteSerializer
 from . serializers import EstudianteSerializer
-
-
-
-
+from . serializers import ParienteSerializer
+from . serializers import MateriaCursoSerializer
+import django_filters
 
 
 # Create your views here.
-class NivelList (APIView):
-
-    def get(self, request):
-        nivel = Nivel.objects.all()
-        serializer =NivelSerializer(nivel, many=True)
-        return Response(serializer.data)
-
-    def post(self):
-        pass
+class NivelList (viewsets.ModelViewSet):
+        queryset = Nivel.objects.all()
+        serializer_class =  NivelSerializer
 
 
-class CursoList (APIView):
-
-    def get(self, request):
-        curso = Curso.objects.all()
-        serializer =CursoSerializer(curso, many=True)
-        return Response(serializer.data)
-
-    def post(self):
-        pass
+class CursoList(viewsets.ModelViewSet):
+        queryset = Curso.objects.all()
+        serializer_class = CursoSerializer
 
 
-class SeccionList (APIView):
+class SeccionList(viewsets.ModelViewSet):
+    queryset = Seccion.objects.all()
+    serializer_class = SeccionSerializer
 
-    def get(self, request):
-        seccion = Seccion.objects.all()
-        serializer =SeccionSerializer(seccion, many=True)
-        return Response(serializer.data)
-
-    def post(self):
-        pass
+class MateriaList(viewsets.ModelViewSet):
+        queryset = Materia.objects.all()
+        serializer_class = MateriaSerializer
 
 
-class MateriaList (APIView):
-
-    def get(self, request):
-        materia = Materia.objects.all()
-        serializer =MateriaSerializer(materia, many=True)
-        return Response(serializer.data)
-
-    def post(self):
-        pass
+class EstudianteList(viewsets.ModelViewSet):
+    queryset = Estudiante.objects.all()
+    serializer_class = EstudianteSerializer
 
 
-class DocenteList (APIView):
+class Docentelist(viewsets.ModelViewSet):
+        queryset = Docente.objects.all()
+        serializer_class = DocenteSerializer
 
-    def get(self, request):
-        docente = Docente.objects.all()
-        serializer = DocenteSerializer(docente, many=True)
-        return Response(serializer.data)
 
-    def post(self):
-        pass
+class ParienteList(viewsets.ModelViewSet):
+        queryset = Pariente.objects.all()
+        serializer_class = ParienteSerializer
 
-class EstudianteList (APIView):
 
-    def get(self, request):
-        estudiante = Docente.objects.all()
-        serializer = EstudianteSerializer(estudiante, many=True)
-        return Response(serializer.data)
+class CursoMateriaList(viewsets.ModelViewSet):
+        queryset = MateriaCurso.objects.all()
+        serializer_class = MateriaCursoSerializer
 
-    def post(self):
-        pass
 
+class PeriodoList(viewsets.ModelViewSet):
+    queryset = Periodo.objects.all()
+    serializer_class = PeriodoSerializer
+
+    class EstudianteFilter(django_filters.FilterSet):
+        name = django_filters.CharFilter(lookup_expr='iexact')
+
+        class Meta:
+            model = Estudiante
+            fields = ['Nombre', 'ApellidoPaterno', 'ApellidoMaterno' ]

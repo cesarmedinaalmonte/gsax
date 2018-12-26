@@ -1,12 +1,14 @@
 from rest_framework import serializers
 
-from .models import Curso
+
+from .models import Curso, Periodo
 from  .models import  Materia
 from  .models import  Nivel
 from  .models import  Seccion
 from  .models import  Estudiante
 from  .models import  Docente
 from  .models import Pariente
+from  .models import  MateriaCurso
 
 
 
@@ -15,28 +17,28 @@ class NivelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Nivel
-        fields = ('__all__')
+        fields = ('id','Nombre')
     #        fields = ('Grado')
 
 class CursoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Curso
-        fields = ('__all__')
+        fields = ('id','Nivel','Grado','Seccion','Nivelnombre','Seccionnombre','Titular')
 #        fields = ('Grado')
 
 class SeccionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Seccion
-        fields = ('__all__')
+        fields = ('id''nombre')
     #        fields = ('Grado')
 
 class MateriaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Materia
-        fields = ('__all__')
+        fields = ( 'id','Nombre', 'Codigo', 'Profesor')
     #        fields = ('Grado')
 
 class EstudianteSerializer(serializers.ModelSerializer):
@@ -45,6 +47,9 @@ class EstudianteSerializer(serializers.ModelSerializer):
         model = Estudiante
         fields = ('__all__')
     #        fields = ('Grado')
+
+
+
 
 class DocenteSerializer(serializers.ModelSerializer):
 
@@ -60,6 +65,18 @@ class ParienteSerializer(serializers.ModelSerializer):
         fields = ('__all__')
     #        fields = ('Grado')
 
+class MateriaCursoSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = MateriaCurso
+        fields = ('id','idmateria', 'idcurso', 'idseccion','iddocente' )
+    #        fields = ('Grado')
 
 
 
+class PeriodoSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Periodo
+        fields = ('id','descripcion','estado')
+    #        fields = ('Grado')

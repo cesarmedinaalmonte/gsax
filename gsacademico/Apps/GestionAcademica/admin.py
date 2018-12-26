@@ -11,4 +11,6 @@ admin.site.register(Materia)
 admin.site.register(Docente)
 admin.site.register(Pariente)
 admin.site.register(Estudiante)
+admin.site.register(MateriaCurso)
+admin.site.register(Periodo)
 

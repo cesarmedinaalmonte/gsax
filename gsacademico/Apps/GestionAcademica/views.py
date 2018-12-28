@@ -63,7 +63,7 @@ class CursoMateriaList(viewsets.ModelViewSet):
         queryset = MateriaCurso.objects.all()
         serializer_class = MateriaCursoSerializer
 
-
+#Filtro
 class PeriodoList(viewsets.ModelViewSet):
     queryset = Periodo.objects.all()
     serializer_class = PeriodoSerializer

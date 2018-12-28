@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.serializers import HyperlinkedModelSerializer
 
 
 from .models import Curso, Periodo
@@ -24,8 +25,8 @@ class CursoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Curso
-        fields = ('id','Nivel','Grado','Seccion','Nivelnombre','Seccionnombre','Titular')
-#        fields = ('Grado')
+        fields = ('id','Nivel','Grado','Seccion')
+         #        fields = ('Grado')
 
 class SeccionSerializer(serializers.ModelSerializer):
 

@@ -6,4 +6,5 @@ class CorsMiddleware(object):
     MIDDLEWARE_CLASSES = (
         # ...
         'app.CorsMiddleware'
+
     )

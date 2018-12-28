@@ -74,14 +74,13 @@ class Seccion (models.Model):
     Nombre = models.CharField(max_length=1)
 
     def __str__(self):
-        return "{0}".format(self.Nombre)
+        return self.Nombre
 
 class Curso (models.Model):
 
     Nivel = models.ForeignKey(Nivel,null=False,blank=False,on_delete=models.CASCADE)
-    Seccion = models.ForeignKey(Seccion,null=True,blank=True, on_delete=models.CASCADE)
+    Seccion = models.ForeignKey(Seccion, on_delete=models.CASCADE)
     Grado = models.CharField(max_length=50)
-    Titular = models.ForeignKey(Docente, null=True,blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return "{0} {1} {2}".format(self.Grado,self.Seccion, self.Nivel)
@@ -120,4 +119,6 @@ class Inscripcion (models.Model):
 
         Estudiante = models.ForeignKey(Estudiante, null=False, blank= False,on_delete= models.CASCADE)
         Periodo = models.ForeignKey(Periodo, null=False, blank=False, on_delete= models.CASCADE)
+        MateriaCurso = models.ForeignKey(MateriaCurso,null=True, blank=True, on_delete= models.CASCADE)
+
 

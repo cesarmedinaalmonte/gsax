@@ -1,0 +1,6 @@
+django>=2.0
+markdown
+django-filter
+djangorestframework
+django-cors-headers
+django-dbbackup

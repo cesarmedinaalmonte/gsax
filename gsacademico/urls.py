@@ -32,5 +32,6 @@ apiurl.register('pariente', ParienteList )
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(apiurl.urls))
+    ##path('api/seccion/(?P<id>\d+)/$','seccion', name = 'seccion')
 
 ]

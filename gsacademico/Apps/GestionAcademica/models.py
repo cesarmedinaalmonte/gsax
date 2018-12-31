@@ -78,9 +78,10 @@ class Seccion (models.Model):
 
 class Curso (models.Model):
 
-    Nivel = models.ForeignKey(Nivel,null=False,blank=False,on_delete=models.CASCADE)
-    Seccion = models.ForeignKey(Seccion, on_delete=models.CASCADE)
+    Nivel = models.ForeignKey(Nivel, related_name='nivel',on_delete=models.CASCADE)
+    Seccion = models.ForeignKey(Seccion, related_name='seccion',  on_delete=models.CASCADE)
     Grado = models.CharField(max_length=50)
+
 
     def __str__(self):
         return "{0} {1} {2}".format(self.Grado,self.Seccion, self.Nivel)

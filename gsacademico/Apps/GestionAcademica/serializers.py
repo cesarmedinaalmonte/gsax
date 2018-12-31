@@ -1,6 +1,6 @@
-from rest_framework import serializers
-from rest_framework.serializers import HyperlinkedModelSerializer
 
+from rest_framework.serializers import  ModelSerializer
+from rest_framework import serializers
 
 from .models import Curso, Periodo
 from  .models import  Materia
@@ -14,35 +14,41 @@ from  .models import  MateriaCurso
 
 
 
-class NivelSerializer(serializers.ModelSerializer):
+class NivelSerializer(ModelSerializer):
+
 
     class Meta:
         model = Nivel
         fields = ('id','Nombre')
     #        fields = ('Grado')
 
-class CursoSerializer(serializers.ModelSerializer):
+class SeccionSerializer(ModelSerializer):
 
-    class Meta:
-        model = Curso
-        fields = ('id','Nivel','Grado','Seccion')
-         #        fields = ('Grado')
-
-class SeccionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Seccion
-        fields = ('id''nombre')
+        fields = ('id','Nombre')
     #        fields = ('Grado')
 
-class MateriaSerializer(serializers.ModelSerializer):
+class CursoSerializer(ModelSerializer):
+
+    #nivel = NivelSerializer(many=True, read_only= True)
+    seccion = SeccionSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = Curso
+        fields = ('id','seccion')
+         #        fields = ('Grado')
+
+
+class MateriaSerializer(ModelSerializer):
 
     class Meta:
         model = Materia
-        fields = ( 'id','Nombre', 'Codigo', 'Profesor')
+        fields = ( 'id','Nombre', 'Codigo')
     #        fields = ('Grado')
 
-class EstudianteSerializer(serializers.ModelSerializer):
+class EstudianteSerializer(ModelSerializer):
 
     class Meta:
         model = Estudiante
@@ -52,21 +58,21 @@ class EstudianteSerializer(serializers.ModelSerializer):
 
 
 
-class DocenteSerializer(serializers.ModelSerializer):
+class DocenteSerializer(ModelSerializer):
 
     class Meta:
         model = Docente
         fields = ('__all__')
     #        fields = ('Grado')
 
-class ParienteSerializer(serializers.ModelSerializer):
+class ParienteSerializer(ModelSerializer):
 
     class Meta:
         model = Pariente
         fields = ('__all__')
     #        fields = ('Grado')
 
-class MateriaCursoSerializer(serializers.ModelSerializer):
+class MateriaCursoSerializer(ModelSerializer):
 
     class Meta:
         model = MateriaCurso
@@ -75,7 +81,7 @@ class MateriaCursoSerializer(serializers.ModelSerializer):
 
 
 
-class PeriodoSerializer(serializers.ModelSerializer):
+class PeriodoSerializer(ModelSerializer):
 
     class Meta:
         model = Periodo

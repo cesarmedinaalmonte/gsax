@@ -102,7 +102,7 @@ class Materia (models.Model):
     def __str__(self):
         return "{0} ({1})".format(self.Nombre, self.Codigo)
 
-class MateriaCurso (models.Model):
+class CursoMateria (models.Model):
 
         idmateria = models.ForeignKey(Materia,null=False,blank=False, on_delete=models.CASCADE)
         idcurso = models.ForeignKey(Curso,null=False,blank=False,on_delete=models.CASCADE)
@@ -120,6 +120,6 @@ class Inscripcion (models.Model):
 
         Estudiante = models.ForeignKey(Estudiante, null=False, blank= False,on_delete= models.CASCADE)
         Periodo = models.ForeignKey(Periodo, null=False, blank=False, on_delete= models.CASCADE)
-        MateriaCurso = models.ForeignKey(MateriaCurso,null=True, blank=True, on_delete= models.CASCADE)
+        CursoMateria = models.ForeignKey(CursoMateria,null=True, blank=True, on_delete= models.CASCADE)
 
 

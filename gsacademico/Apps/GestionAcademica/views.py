@@ -11,8 +11,9 @@ from . models import Materia
 from . models import Docente
 from . models import Curso
 from . models import Estudiante
-from . models import MateriaCurso
+from . models import CursoMateria
 from . models import Periodo
+from . models import Inscripcion
 from .serializers import CursoSerializer, PeriodoSerializer
 from . serializers import NivelSerializer
 from . serializers import SeccionSerializer
@@ -20,7 +21,9 @@ from . serializers import MateriaSerializer
 from . serializers import DocenteSerializer
 from . serializers import EstudianteSerializer
 from . serializers import ParienteSerializer
-from . serializers import MateriaCursoSerializer
+from . serializers import CursoMateriaSerializer
+from . serializers import InscripcionSerializer
+
 import django_filters
 
 
@@ -60,8 +63,14 @@ class ParienteList(viewsets.ModelViewSet):
 
 
 class CursoMateriaList(viewsets.ModelViewSet):
-        queryset = MateriaCurso.objects.all()
-        serializer_class = MateriaCursoSerializer
+        queryset = CursoMateria.objects.all()
+        serializer_class = CursoMateriaSerializer
+
+
+class InscripcionList(viewsets.ModelViewSet):
+    queryset = Inscripcion.objects.all()
+    serializer_class = InscripcionSerializer
+
 
 #Filtro
 class PeriodoList(viewsets.ModelViewSet):

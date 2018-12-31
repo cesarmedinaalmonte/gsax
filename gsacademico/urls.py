@@ -25,7 +25,7 @@ apiurl.register('nivel', NivelList )
 apiurl.register('curso', CursoList )
 apiurl.register('seccion', SeccionList )
 apiurl.register('materia', MateriaList )
-apiurl.register('estudinate', EstudianteList )
+apiurl.register('estudiante', EstudianteList )
 apiurl.register('docente', Docentelist )
 apiurl.register('pariente', ParienteList )
 

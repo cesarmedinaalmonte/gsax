@@ -12,10 +12,10 @@ class Docente (models.Model):
     SEXO = (('M', 'Masculino' ), ('F','Femenino'))
     Sexo = models.CharField(max_length=1,choices=SEXO,default='M')
     FechaNacimiento = models.DateField()
-    TelefonoCasa = models.CharField(max_length=10)
-    TelefonoCelular = models.CharField(max_length=10)
-    CorreoEmpresarial =  models.EmailField(max_length=60)
-    CorreoPersonal =  models.EmailField(max_length=60)
+    TelefonoCasa = models.CharField(null=True,blank=True,max_length=10)
+    TelefonoCelular = models.CharField(null=True,blank=True,max_length=10)
+    CorreoEmpresarial =  models.EmailField(null=True,blank=True,max_length=60)
+    CorreoPersonal =  models.EmailField(null=True,blank=True,max_length=60)
     Direccion =  models.CharField(max_length=120)
 
     def NombreCompleto(self):
@@ -32,10 +32,10 @@ class Pariente (models.Model):
     SEXO = (('M', 'Masculino' ), ('F','Femenino'))
     Sexo = models.CharField(max_length=1,choices=SEXO,default='M')
     FechaNacimiento = models.DateField()
-    TelefonoCasa = models.CharField(max_length=10)
-    TelefonoCelular = models.CharField(max_length=10)
-    CorreoEmpresarial =  models.EmailField(max_length=60)
-    CorreoPersonal =  models.EmailField(max_length=60)
+    TelefonoCasa = models.CharField(null=True,blank=True,max_length=10)
+    TelefonoCelular = models.CharField(null=True,blank=True,max_length=10)
+    CorreoEmpresarial =  models.EmailField(null=True,blank=True,max_length=60)
+    CorreoPersonal =  models.EmailField(null=True,blank=True,max_length=60)
     Direccion =  models.CharField(max_length=120)
 
     def NombreCompleto(self):
@@ -52,7 +52,7 @@ class Estudiante (models.Model):
     SEXO = (('M', 'Masculino' ), ('F','Femenino'))
     Sexo = models.CharField(max_length=1,choices=SEXO,default='M')
     FechaNacimiento = models.DateField()
-    CorreoPersonal =  models.EmailField(max_length=60)
+    CorreoPersonal =  models.EmailField(null=True,blank=True,max_length=60)
     PADRE = models.ForeignKey(Pariente,null=True,blank=True, on_delete=models.CASCADE)
 
 

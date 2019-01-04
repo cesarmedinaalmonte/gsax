@@ -6,16 +6,13 @@ from django.db import models
 
 class Docente (models.Model):
 
-    ApellidoPaterno = models.CharField(max_length=60)
-    ApellidoMaterno = models.CharField(max_length=60)
+    Apellido = models.CharField(max_length=60)
     Nombre = models.CharField(max_length=60)
     SEXO = (('M', 'Masculino' ), ('F','Femenino'))
     Sexo = models.CharField(max_length=1,choices=SEXO,default='M')
-    FechaNacimiento = models.DateField()
-    TelefonoCasa = models.CharField(null=True,blank=True,max_length=10)
     TelefonoCelular = models.CharField(null=True,blank=True,max_length=10)
-    CorreoEmpresarial =  models.EmailField(null=True,blank=True,max_length=60)
-    CorreoPersonal =  models.EmailField(null=True,blank=True,max_length=60)
+    Email = models.EmailField(null=True,blank=True,max_length=60)
+
     Direccion =  models.CharField(max_length=120)
 
     def NombreCompleto(self):

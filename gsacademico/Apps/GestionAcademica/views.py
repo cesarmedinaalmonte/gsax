@@ -44,6 +44,7 @@ class SeccionList(viewsets.ModelViewSet):
 
 class MateriaList(viewsets.ModelViewSet):
         queryset = Materia.objects.all()
+
         serializer_class = MateriaSerializer
 
 
@@ -53,7 +54,7 @@ class EstudianteList(viewsets.ModelViewSet):
 
 
 class Docentelist(viewsets.ModelViewSet):
-        queryset = Docente.objects.all()
+        queryset = Docente.objects.all().order_by('nombre')
         serializer_class = DocenteSerializer
 
 

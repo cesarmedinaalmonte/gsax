@@ -22,7 +22,7 @@ class NivelSerializer(serializers.ModelSerializer):
         model = Nivel
         fields = [
             'id',
-            'Nombre'
+            'nombre'
         ]
     #        fields = ('Grado')
 
@@ -33,22 +33,22 @@ class SeccionSerializer(serializers.ModelSerializer):
         model = Seccion
         fields = [
             'id',
-            'Nombre'
+            'nombre'
         ]
 
 
 
 class CursoSerializer(serializers.ModelSerializer):
 
-    Seccion = SeccionSerializer(many=False, read_only=True)
-    Nivel = NivelSerializer(many= False, read_only= True)
+    seccion = SeccionSerializer(many=False, read_only=True)
+    nivel = NivelSerializer(many= False, read_only= True)
     class Meta:
         model = Curso
         fields = [
             'id',
-            'Nivel',
-            'Seccion',
-            'Grado'
+            'nivel',
+            'seccion',
+            'grado'
         ]
 
 
@@ -58,8 +58,8 @@ class MateriaSerializer(serializers.ModelSerializer):
         model = Materia
         fields = [
             'id',
-            'Nombre',
-            'Codigo'
+            'nombre',
+            'codigo'
     ]
 
 class EstudianteSerializer(serializers.ModelSerializer):
@@ -112,15 +112,15 @@ class PeriodoSerializer(serializers.ModelSerializer):
         ]
 class InscripcionSerializer(serializers.ModelSerializer):
 
-    Estudiante = EstudianteSerializer(many= False , read_only=False)
-    Periodo = PeriodoSerializer(many= False, read_only=False)
-    CursoMateria = CursoMateriaSerializer(many=False, read_only=False)
+    estudiante = EstudianteSerializer(many= False , read_only=False)
+    periodo = PeriodoSerializer(many= False, read_only=False)
+    cursoMateria = CursoMateriaSerializer(many=False, read_only=False)
 
     class Meta:
         model = Inscripcion
         fields = [
             'id',
-            'Estudiante',
-            'Periodo',
-            'CursoMateria'
+            'estudiante',
+            'periodo',
+            'cursoMateria'
         ]

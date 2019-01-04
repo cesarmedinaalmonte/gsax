@@ -82,4 +82,4 @@ class PeriodoList(viewsets.ModelViewSet):
 
         class Meta:
             model = Estudiante
-            fields = ['Nombre', 'ApellidoPaterno', 'ApellidoMaterno' ]
+            fields = ['nombre', 'apellidoPaterno', 'apellidoMaterno' ]

@@ -16,83 +16,80 @@ class Docente (models.Model):
 
     def NombreCompleto(self):
         cadena = "{0} {1}"
-        return cadena.format(self.Apellido, self.Nombre)
+        return cadena.format(self.apellido, self.nombre)
     def __str__(self):
         return self.NombreCompleto()
 
 class Pariente (models.Model):
 
-    ApellidoPaterno = models.CharField(max_length=60)
-    ApellidoMaterno = models.CharField(max_length=60)
-    Nombre = models.CharField(max_length=60)
-    SEXO = (('M', 'Masculino' ), ('F','Femenino'))
-    Sexo = models.CharField(max_length=1,choices=SEXO,default='M')
-    FechaNacimiento = models.DateField()
-    TelefonoCasa = models.CharField(null=True,blank=True,max_length=10)
-    TelefonoCelular = models.CharField(null=True,blank=True,max_length=10)
-    CorreoEmpresarial =  models.EmailField(null=True,blank=True,max_length=60)
-    CorreoPersonal =  models.EmailField(null=True,blank=True,max_length=60)
-    Direccion =  models.CharField(max_length=120)
+    apellido = models.CharField(max_length=60)
+    nombre = models.CharField(max_length=60)
+    SEXO = (('M', 'Masculino'), ('F', 'Femenino'))
+    sexo = models.CharField(max_length=1, choices=SEXO, default='M')
+    telefono = models.CharField(null=True, blank=True, max_length=10)
+    email = models.EmailField(null=True, blank=True, max_length=60)
+    direccion = models.CharField(max_length=120)
 
     def NombreCompleto(self):
-        cadena = "{0} {1}, {2}"
-        return cadena.format(self.ApellidoPaterno, self.ApellidoMaterno, self.Nombre)
+        cadena = "{0} {1}"
+        return cadena.format(self.apellido, self.nombre)
+
     def __str__(self):
         return self.NombreCompleto()
 
 class Estudiante (models.Model):
 
-    ApellidoPaterno = models.CharField(max_length=60)
-    ApellidoMaterno = models.CharField(max_length=60)
-    Nombre = models.CharField(max_length=60)
+    apellidoPaterno = models.CharField(max_length=60)
+    apellidoMaterno = models.CharField(max_length=60)
+    nombre = models.CharField(max_length=60)
     SEXO = (('M', 'Masculino' ), ('F','Femenino'))
-    Sexo = models.CharField(max_length=1,choices=SEXO,default='M')
-    FechaNacimiento = models.DateField()
-    CorreoPersonal =  models.EmailField(null=True,blank=True,max_length=60)
-    PADRE = models.ForeignKey(Pariente,null=True,blank=True, on_delete=models.CASCADE)
+    sexo = models.CharField(max_length=1,choices=SEXO,default='M')
+    fechaNacimiento = models.DateField()
+    email =  models.EmailField(null=True,blank=True,max_length=60)
+    padre = models.ForeignKey(Pariente,null=True,blank=True, on_delete=models.CASCADE)
 
 
     def NombreCompleto(self):
         cadena = "{0} {1}, {2}"
-        return cadena.format(self.ApellidoPaterno, self.ApellidoMaterno, self.Nombre)
+        return cadena.format(self.apellidoPaterno, self.apellidoMaterno, self.nombre)
     def __str__(self):
         return self.NombreCompleto()
 
 
 class Nivel (models.Model):
 
-    Nombre = models.CharField(max_length=35)
+    nombre = models.CharField(max_length=35)
     def __str__(self):
-        return "{0}".format(self.Nombre)
+        return "{0}".format(self.nombre)
 
 class Seccion (models.Model):
 
-    Nombre = models.CharField(max_length=1)
+    nombre = models.CharField(max_length=1)
 
     def __str__(self):
-        return self.Nombre
+        return self.nombre
 
 class Curso (models.Model):
 
-    Nivel = models.ForeignKey(Nivel, related_name='nivel',on_delete=models.CASCADE)
-    Seccion = models.ForeignKey(Seccion, related_name='seccion',  on_delete=models.CASCADE)
-    Grado = models.CharField(max_length=50)
+    nivel = models.ForeignKey(Nivel, related_name='nivel',on_delete=models.CASCADE)
+    seccion = models.ForeignKey(Seccion, related_name='seccion',  on_delete=models.CASCADE)
+    grado = models.CharField(max_length=50)
 
 
     def __str__(self):
-        return "{0} {1} {2}".format(self.Grado,self.Seccion, self.Nivel)
+        return "{0} {1} {2}".format(self.grado,self.seccion, self.nivel)
 
-    def Nivelnombre(self):
-        return self.Nivel.Nombre
+    def nivelnombre(self):
+        return self.nivel.nombre
 
-    def Seccionnombre(self):
-        return self.Seccion.Nombre
+    def seccionnombre(self):
+        return self.seccion.nombre
 
 
 class Materia (models.Model):
 
-    Nombre = models.CharField(max_length=50)
-    Codigo = models.CharField(max_length=8)
+    nombre = models.CharField(max_length=50)
+    codigo = models.CharField(max_length=8)
 
 
     def __str__(self):
@@ -114,8 +111,8 @@ class Periodo (models.Model):
 
 class Inscripcion (models.Model):
 
-        Estudiante = models.ForeignKey(Estudiante, null=False, blank= False,on_delete= models.CASCADE)
-        Periodo = models.ForeignKey(Periodo, null=False, blank=False, on_delete= models.CASCADE)
-        CursoMateria = models.ForeignKey(CursoMateria,null=True, blank=True, on_delete= models.CASCADE)
+        estudiante = models.ForeignKey(Estudiante, null=False, blank= False,on_delete= models.CASCADE)
+        periodo = models.ForeignKey(Periodo, null=False, blank=False, on_delete= models.CASCADE)
+        cursoMateria = models.ForeignKey(CursoMateria,null=True, blank=True, on_delete= models.CASCADE)
 
 

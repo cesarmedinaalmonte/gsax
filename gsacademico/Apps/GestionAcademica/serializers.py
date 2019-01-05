@@ -1,11 +1,9 @@
 
 from rest_framework.serializers import  ModelSerializer
-from rest_framework import serializers
+from rest_framework import serializers, status
 
 from .models import Curso, Periodo
 from  .models import  Materia
-from  .models import  Nivel
-from  .models import  Seccion
 from  .models import  Estudiante
 from  .models import  Docente
 from  .models import Pariente
@@ -15,41 +13,21 @@ from  .models import  Inscripcion
 
 
 
-class NivelSerializer(serializers.ModelSerializer):
-
-
-    class Meta:
-        model = Nivel
-        fields = [
-            'id',
-            'nombre'
-        ]
-    #        fields = ('Grado')
-
-class SeccionSerializer(serializers.ModelSerializer):
-
-
-    class Meta:
-        model = Seccion
-        fields = [
-            'id',
-            'nombre'
-        ]
-
-
 
 class CursoSerializer(serializers.ModelSerializer):
 
-    seccion = SeccionSerializer(many=False, read_only=False)
-    nivel = NivelSerializer(many=False, read_only= False)
     class Meta:
         model = Curso
         fields = [
             'id',
-            'grado',
+            'nombre',
             'seccion',
             'nivel'
         ]
+        def create(self, validated_data):
+            seccion_data = validated_data.pop('seccion')
+            curso = Curso.objects.create(validated_data)
+            return curso
 
 
 class MateriaSerializer(serializers.ModelSerializer):
@@ -88,16 +66,16 @@ class ParienteSerializer(serializers.ModelSerializer):
 
 class CursoMateriaSerializer(serializers.ModelSerializer):
 
-    idmateria = MateriaSerializer(many=False , read_only=True)
-    idcurso = CursoSerializer(many= False , read_only= True)
-    iddocente = DocenteSerializer(many=False, read_only=True)
+    materia = MateriaSerializer(many=False , read_only=True)
+    curso = CursoSerializer(many= False , read_only= True)
+    docente = DocenteSerializer(many=False, read_only=True)
     class Meta:
         model = CursoMateria
         fields = [
             'id',
-            'idmateria',
-            'idcurso',
-            'iddocente'
+            'materia',
+            'curso',
+            'docente'
         ]
 
 

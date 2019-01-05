@@ -4,9 +4,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import serializers, viewsets
 from rest_framework.response import Response
 from rest_framework import status
-from . models import Nivel
 from . models import Pariente
-from . models import Seccion
 from . models import Materia
 from . models import Docente
 from . models import Curso
@@ -15,8 +13,6 @@ from . models import CursoMateria
 from . models import Periodo
 from . models import Inscripcion
 from .serializers import CursoSerializer, PeriodoSerializer
-from . serializers import NivelSerializer
-from . serializers import SeccionSerializer
 from . serializers import MateriaSerializer
 from . serializers import DocenteSerializer
 from . serializers import EstudianteSerializer
@@ -28,23 +24,13 @@ import django_filters
 
 
 # Create your views here.
-class NivelList (viewsets.ModelViewSet):
-        queryset = Nivel.objects.all()
-        serializer_class =  NivelSerializer
-
 
 class CursoList(viewsets.ModelViewSet):
-        queryset = Curso.objects.all().order_by('nivel__nombre','grado')
+        queryset = Curso.objects.all().order_by('nivel','nombre')
         serializer_class = CursoSerializer
-
-
-class SeccionList(viewsets.ModelViewSet):
-    queryset = Seccion.objects.all().order_by('nombre')
-    serializer_class = SeccionSerializer
 
 class MateriaList(viewsets.ModelViewSet):
         queryset = Materia.objects.all().order_by('nombre')
-
         serializer_class = MateriaSerializer
 
 

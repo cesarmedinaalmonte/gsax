@@ -17,14 +17,13 @@ from django.contrib import admin
 from django.urls import path , include
 from rest_framework import urls , routers
 from rest_framework.urlpatterns import format_suffix_patterns
-from gsacademico.Apps.GestionAcademica.views import NivelList,CursoList, \
-    SeccionList, MateriaList, EstudianteList, Docentelist, ParienteList, PeriodoList, CursoMateriaList, InscripcionList
+from gsacademico.Apps.GestionAcademica.views import CursoList, \
+MateriaList, EstudianteList, Docentelist, ParienteList, PeriodoList, CursoMateriaList, InscripcionList
 
 apiurl = routers.SimpleRouter()
 
-apiurl.register('nivel', NivelList )
+
 apiurl.register('curso', CursoList )
-apiurl.register('seccion', SeccionList )
 apiurl.register('materia', MateriaList )
 apiurl.register('estudiante', EstudianteList )
 apiurl.register('docente', Docentelist )

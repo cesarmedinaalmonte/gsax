@@ -56,34 +56,20 @@ class Estudiante (models.Model):
         return self.NombreCompleto()
 
 
-class Nivel (models.Model):
 
-    nombre = models.CharField(max_length=35)
-    def __str__(self):
-        return "{0}".format(self.nombre)
-
-class Seccion (models.Model):
-
-    nombre = models.CharField(max_length=1)
-
-    def __str__(self):
-        return self.nombre
 
 class Curso (models.Model):
 
-    nivel = models.ForeignKey(Nivel, related_name='nivel',on_delete=models.CASCADE)
-    seccion = models.ForeignKey(Seccion, related_name='seccion',  on_delete=models.CASCADE)
-    grado = models.CharField(max_length=50)
+    SECCION = (('A','A'),('B','B'),('C','C'),('D','D'),('E','E'))
+    NIVEL = (('Inicial','Inicial'),('Primaria','Primaria'),('Secundaria','Secundaria'))
+    nivel = models.CharField(max_length=20,choices=NIVEL,default='Primaria')
+    seccion = models.CharField(max_length=1,choices=SECCION,default='A')
+    nombre = models.CharField(max_length=50)
 
 
     def __str__(self):
-        return "{0} {1} {2}".format(self.grado,self.seccion, self.nivel)
+        return "{0} {1} {2}".format(self.nombre,self.seccion, self.nivel)
 
-    def nivelnombre(self):
-        return self.nivel.nombre
-
-    def seccionnombre(self):
-        return self.seccion.nombre
 
 
 class Materia (models.Model):
@@ -93,13 +79,13 @@ class Materia (models.Model):
 
 
     def __str__(self):
-        return "{0} ({1})".format(self.Nombre, self.Codigo)
+        return "{0} ({1})".format(self.nombre, self.codigo)
 
 class CursoMateria (models.Model):
 
-        idmateria = models.ForeignKey(Materia,null=False,blank=False, on_delete=models.CASCADE)
-        idcurso = models.ForeignKey(Curso,null=False,blank=False,on_delete=models.CASCADE)
-        iddocente = models.ForeignKey(Docente,null=False,blank=False,on_delete=models.CASCADE)
+        materia = models.ForeignKey(Materia,null=False,blank=False, on_delete=models.CASCADE)
+        curso = models.ForeignKey(Curso,null=False,blank=False,on_delete=models.CASCADE)
+        docente = models.ForeignKey(Docente,null=False,blank=False,on_delete=models.CASCADE)
 
 
 class Periodo (models.Model):

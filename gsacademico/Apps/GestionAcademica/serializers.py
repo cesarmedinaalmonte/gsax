@@ -40,15 +40,15 @@ class SeccionSerializer(serializers.ModelSerializer):
 
 class CursoSerializer(serializers.ModelSerializer):
 
-    seccion = SeccionSerializer(many=False, read_only=True)
-    nivel = NivelSerializer(many= False, read_only= True)
+    seccion = SeccionSerializer(many=False, read_only=False)
+    nivel = NivelSerializer(many=False, read_only= False)
     class Meta:
         model = Curso
         fields = [
             'id',
-            'nivel',
+            'grado',
             'seccion',
-            'grado'
+            'nivel'
         ]
 
 

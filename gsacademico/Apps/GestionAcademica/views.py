@@ -34,22 +34,22 @@ class NivelList (viewsets.ModelViewSet):
 
 
 class CursoList(viewsets.ModelViewSet):
-        queryset = Curso.objects.all()
+        queryset = Curso.objects.all().order_by('nivel__nombre','grado')
         serializer_class = CursoSerializer
 
 
 class SeccionList(viewsets.ModelViewSet):
-    queryset = Seccion.objects.all()
+    queryset = Seccion.objects.all().order_by('nombre')
     serializer_class = SeccionSerializer
 
 class MateriaList(viewsets.ModelViewSet):
-        queryset = Materia.objects.all()
+        queryset = Materia.objects.all().order_by('nombre')
 
         serializer_class = MateriaSerializer
 
 
 class EstudianteList(viewsets.ModelViewSet):
-    queryset = Estudiante.objects.all()
+    queryset = Estudiante.objects.all().order_by('nombre')
     serializer_class = EstudianteSerializer
 
 

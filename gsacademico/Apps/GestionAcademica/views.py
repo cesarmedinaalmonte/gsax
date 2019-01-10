@@ -37,6 +37,7 @@ class MateriaList(viewsets.ModelViewSet):
 class EstudianteList(viewsets.ModelViewSet):
     queryset = Estudiante.objects.all().order_by('nombre')
     serializer_class = EstudianteSerializer
+    filter_fields = ('nombre', 'id')
 
 
 class Docentelist(viewsets.ModelViewSet):

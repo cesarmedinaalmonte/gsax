@@ -83,9 +83,9 @@ class Materia (models.Model):
 
 class CursoMateria (models.Model):
 
-        materia = models.ForeignKey(Materia,null=False,blank=False, on_delete=models.CASCADE)
-        curso = models.ForeignKey(Curso,null=False,blank=False,on_delete=models.CASCADE)
-        docente = models.ForeignKey(Docente,null=False,blank=False,on_delete=models.CASCADE)
+        materia = models.ForeignKey(Materia,related_name='materia', on_delete=models.CASCADE)
+        curso = models.ForeignKey(Curso,related_name='curso',on_delete=models.CASCADE)
+        docente = models.ForeignKey(Docente,related_name='docente',on_delete=models.CASCADE)
 
 
 class Periodo (models.Model):

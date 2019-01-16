@@ -18,7 +18,7 @@ from django.urls import path , include
 from rest_framework import urls , routers
 from rest_framework.urlpatterns import format_suffix_patterns
 from gsacademico.Apps.GestionAcademica.views import CursoList, \
-MateriaList, EstudianteList, Docentelist, ParienteList, PeriodoList, CursoMateriaList, InscripcionList
+MateriaList, EstudianteList, Docentelist, ParienteList, PeriodoList, CursoMateriaList, InscripcionList, CursoListilimitada, Docentelistilimitada
 
 apiurl = routers.SimpleRouter()
 
@@ -31,10 +31,14 @@ apiurl.register('pariente', ParienteList )
 apiurl.register('periodo', PeriodoList )
 apiurl.register('cursomateria', CursoMateriaList )
 apiurl.register('inscripcion', InscripcionList )
+apiurl.register('cursolist', CursoListilimitada )
+apiurl.register('docentelist', Docentelistilimitada)
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(apiurl.urls))
+
 
 ]

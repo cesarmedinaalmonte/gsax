@@ -26,7 +26,7 @@ class CursoSerializer(serializers.ModelSerializer):
 
 class MateriaSerializer(serializers.ModelSerializer):
 
-    id = serializers.IntegerField(read_only=True)
+
     class Meta:
         model = Materia
         fields = [
@@ -45,7 +45,7 @@ class ParienteSerializer(serializers.ModelSerializer):
 class EstudianteSerializer(WritableNestedModelSerializer,serializers.ModelSerializer):
 
     id = serializers.IntegerField(read_only=True)
-    padre = ParienteSerializer()
+    padre = serializers.StringRelatedField(many=False)
 
     class Meta:
         model = Estudiante
@@ -67,21 +67,27 @@ class DocenteSerializer(serializers.ModelSerializer):
     #        fields = ('Grado')
 
 
-class CursoMateriaSerializer(WritableNestedModelSerializer,serializers.ModelSerializer):
+class CursoMateriaSerializer(serializers.ModelSerializer):
 
-    materia = MateriaSerializer(many=False, required=True)
-    curso = CursoSerializer(many= False, required=True)
-    docente = DocenteSerializer(many=False, required=True)
+    # materia = MateriaSerializer()
+    # curso = CursoSerializer(many=False, read_only=True)
+    # docente = DocenteSerializer(many=False, read_only=True)
 
+    # materia = Materia.objects.filter(pk=2) # matetica
+
+    # print('test',materia_queryset)
+    # exit()
+
+    # materia = Materia.objects.all()
+
+    # materia = serializers.PrimaryKeyRelatedField(queryset=Materia.objects.all())
+    # curso = serializers.PrimaryKeyRelatedField(queryset=Curso.objects.all())
+    # docente = serializers.PrimaryKeyRelatedField(queryset=Docente.objects.all())
 
     class Meta:
         model = CursoMateria
-        fields = [
-            'id',
-            'materia',
-            'curso',
-            'docente'
-        ]
+        fields = ( 'id', 'materia', 'curso', 'docente')
+
 
 class PeriodoSerializer(serializers.ModelSerializer):
 
@@ -94,12 +100,12 @@ class PeriodoSerializer(serializers.ModelSerializer):
             'descripcion',
             'estado'
         ]
-class InscripcionSerializer(WritableNestedModelSerializer,serializers.ModelSerializer):
+class InscripcionSerializer(serializers.ModelSerializer):
 
 
-    estudiante = EstudianteSerializer(many= False , read_only=False)
-    periodo = PeriodoSerializer(many= False, read_only=False)
-    cursoMateria = CursoMateriaSerializer(many=False, read_only=False)
+    estudiante = serializers.PrimaryKeyRelatedField(many= False , read_only=True)
+    periodo = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    cursoMateria = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
 
     class Meta:
         model = Inscripcion
